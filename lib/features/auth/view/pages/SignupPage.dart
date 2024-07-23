@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fpdart/fpdart.dart' show Left, Right;
 import 'package:nava/core/theme/app_pallete.dart';
+import 'package:nava/features/auth/repositories/auth_remote_repository.dart';
+import 'package:nava/features/auth/view/pages/login_page.dart';
 import 'package:nava/features/auth/widget/auth_gradiant_button.dart';
 import 'package:nava/features/auth/widget/custom_field.dart';
 
@@ -66,26 +69,46 @@ class _SignuppageState extends State<Signuppage> {
               const SizedBox(
                 height: 20,
               ),
-              AuthGradiantButton(
+              AuthGradientButton(
                 buttonText: 'Sign up',
-                onTap: () {},
+                onTap: () async {
+                  final res = await AuthRemoteRepository().signup(
+                      name: nameController.text,
+                      email: emailController.text,
+                      password: passwordController.text);
+                  final val = switch (res) {
+                    Left(value: final l) => l,
+                    Right(value: final r) => r.toString()
+                  };
+                  print(val);
+                },
               ),
               const SizedBox(
                 height: 20,
               ),
-              RichText(
-                text: TextSpan(
-                  text: 'Already have an account?  ',
-                  style: Theme.of(context).textTheme.titleMedium,
-                  children: const [
-                    TextSpan(
-                      text: 'Sign In',
-                      style: TextStyle(
-                        color: Pallete.gradient1,
-                        fontWeight: FontWeight.bold,
-                      ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Loginpage(),
                     ),
-                  ],
+                  );
+                },
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Already have an account?  ',
+                    style: Theme.of(context).textTheme.titleMedium,
+                    children: const [
+                      TextSpan(
+                        text: 'Sign In',
+                        style: TextStyle(
+                          color: Pallete.gradient1,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],
