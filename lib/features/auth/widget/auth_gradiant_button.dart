@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nava/core/theme/app_pallete.dart';
 
-class AuthGradiantButton extends StatelessWidget {
+class AuthGradientButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback onTap;
-  const AuthGradiantButton({
+  const AuthGradientButton({
     super.key,
     required this.buttonText,
     required this.onTap,
@@ -14,19 +14,23 @@ class AuthGradiantButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [
-              Pallete.gradient1,
-              Pallete.gradient2,
-            ],
-          ),
-          borderRadius: BorderRadius.circular(7)),
+        gradient: const LinearGradient(
+          colors: [
+            Pallete.gradient1,
+            Pallete.gradient2
+          ],
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+        ),
+        borderRadius: BorderRadius.circular(7),
+      ),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onTap,
         style: ElevatedButton.styleFrom(
-            fixedSize: const Size(395, 55),
-            backgroundColor: Pallete.transparentColor,
-            shadowColor: Pallete.transparentColor),
+          fixedSize: const Size(395, 55),
+          backgroundColor: Pallete.transparentColor,
+          shadowColor: Pallete.transparentColor,
+        ),
         child: Text(
           buttonText,
           style: const TextStyle(
