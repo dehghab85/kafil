@@ -15,6 +15,8 @@ class Pallete {
   static const Color greyColor = Colors.grey;
   static const Color errorColor = Colors.redAccent;
   static const Color transparentColor = Colors.transparent;
+  static const Color backgroundshadow = Color.fromRGBO(255, 255, 255, 0.75);
+  static const Color maincolor = Color.fromRGBO(64, 145, 108, 1);
 
   static const Color inactiveSeekColor = Colors.white38;
 }
